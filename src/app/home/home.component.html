@@ -75,11 +75,13 @@
     <div *ngIf="usuarios" class="usuarios-container">
         <div class="usuarios">
             <p id="title">Ingreso de usuarios</p>
+            <input #mail id="mail" placeholder="Correo" type="mail">
             <input #name id="name" placeholder="Nombre">
             <div class="2">
                 <input #password id="password" placeholder="Contraseña" type="password">
             </div>
-            <button id="btn">Ingresar usuario</button>
+            <input #foto id="foto" type="file" >
+            <button (click)="aver(foto.value)" id="btn">Ingresar usuario</button>
             <p style="color: red;">{{errorUsuario}}</p>
         </div>
 

@@ -39,6 +39,9 @@ cerrarSesion(){
   localStorage.clear();
   window.location.reload()
 }
+aver(foto: any){
+  console.log(foto)
+}
 
 verUsuarios()
 {
