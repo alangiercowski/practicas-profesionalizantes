@@ -21,7 +21,7 @@ input{
 
     color: #333;
 }
-#name,#password{
+#name, #password, #mail, #foto{
     height: 7.5vh;
     width: 30vw;
     margin-bottom: 1vh;
