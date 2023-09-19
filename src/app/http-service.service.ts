@@ -19,4 +19,8 @@ export class HttpService {
   login(cuerpo: any){
     return this.http.post(this.urlApi + "/LoginAdministrador", cuerpo);
   }
+
+  ingresarUsuario(cuerpo: any){
+    return this.http.post(this.urlApi + "/investigadores", cuerpo, {headers: {Authorization: localStorage["clave"]}});
+  }
 }

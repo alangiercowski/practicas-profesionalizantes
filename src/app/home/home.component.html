@@ -28,37 +28,37 @@
                         <a class="nav-link" id="btn-registro" 
                             routerLink="/registro">Registro</a>
                     </li>-->
-                    <li *ngIf = "!logeado" class="nav-item dropdown">
-                        <a class="nav-link" id="btn-login"
-                            href="#" role="button" data-bs-toggle="dropdown" routerLink="login" aria-expanded="false">
+                    <li *ngIf="!logeado" class="nav-item dropdown">
+                        <a class="nav-link" id="btn-login" href="#" role="button" data-bs-toggle="dropdown"
+                            routerLink="login" aria-expanded="false">
                             Iniciar Sesion
                         </a>
                     </li>
-                    <li *ngIf = "logeado" class="nav-item dropdown">
-                        <a  class="nav-link" id="btn-cs" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop2" (click)="verUsuarios()" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <li *ngIf="logeado" class="nav-item dropdown">
+                        <a class="nav-link" id="btn-cs" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                            (click)="verUsuarios()" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Usuarios
                         </a>
                     </li>
-                    <li *ngIf = "logeado" class="nav-item dropdown">
-                        <a  class="nav-link" id="btn-cs" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop2" (click)="verEventos()" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <li *ngIf="logeado" class="nav-item dropdown">
+                        <a class="nav-link" id="btn-cs" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                            (click)="verEventos()" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Eventos
                         </a>
                     </li>
-                    <li *ngIf = "botonAdmins" class="nav-item dropdown">
-                        <a  class="nav-link" id="btn-cs" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop2" (click)="verAdmins()" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <li *ngIf="botonAdmins" class="nav-item dropdown">
+                        <a class="nav-link" id="btn-cs" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                            (click)="verAdmins()" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Administradores
                         </a>
                     </li>
-                    <li *ngIf = "logeado" class="nav-item dropdown">
-                        <a  class="nav-link" id="btn-cs" data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrop2" (click)="cerrarSesion()" href="#" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">
+                    <li *ngIf="logeado" class="nav-item dropdown">
+                        <a class="nav-link" id="btn-cs" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"
+                            (click)="cerrarSesion()" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
                             Cerrar Sesion
                         </a>
                     </li>
@@ -80,14 +80,14 @@
             <div class="2">
                 <input #password id="password" placeholder="Contraseña" type="password">
             </div>
-            <input #foto id="foto" type="file" >
-            <button (click)="aver(foto.value)" id="btn">Ingresar usuario</button>
+            <input #foto id="foto" type="file">
+            <button (click)="ingresarUsuario(name.value, mail.value, password.value); verString64" id="btn">Ingresar usuario</button>
             <p style="color: red;">{{errorUsuario}}</p>
         </div>
 
     </div>
-   
-    
+
+
 </body>
 
 </html>

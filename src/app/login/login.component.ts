@@ -25,6 +25,7 @@ export class LoginComponent {
         console.log(data)
         localStorage.setItem("clave", JSON.parse(JSON.stringify(data)).claveJWT)
         localStorage.setItem("esSuper", JSON.parse(JSON.stringify(data)).esSuper)
+        localStorage.setItem("nombreUsuario", JSON.parse(JSON.stringify(data)).nombre)
         this.router.navigate([""])
       },
       error: (error) => {
