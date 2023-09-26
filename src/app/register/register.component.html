@@ -1,0 +1,12 @@
+<div class="register-container">
+    <div class="register">
+        <p id="title">Registro de cuenta</p>
+        <input #name id="nombre" placeholder="Nombre">
+        <input #mail id="mail" placeholder="Correo" type="email">
+        <input #pw1 id="pw1" class="pw" placeholder="Contraseña" type="password">
+        <input #pw2 id="pw2" class="pw" placeholder="Repita la contraseña" type="password">
+        <button id="btn" (click)="register(mail.value, pw1.value, pw2.value, name.value)">Registrarse</button>
+        <button id="btn-login" routerLink="/login">¿Ya tenés cuenta?</button>
+        <p id="error"style="color: red;">{{error}}</p>
+    </div>
+</div>
