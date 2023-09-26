@@ -1,0 +1,10 @@
+<div class="login-container">
+    <div class="login">
+        <p id="title">Inicio de sesión</p>
+        <input id="nombre" #nombre placeholder="Nombre de usuario">
+        <input id="pw" #pw type="password" placeholder="Contraseña">
+        <button id="btn" (click)="login(nombre.value,pw.value)">Iniciar sesión</button>
+        <button id="btn-register" routerLink="/register">¿No tenés cuenta?</button>
+        <p id="error" style="color: red;">{{error}}</p>
+    </div>
+</div>
