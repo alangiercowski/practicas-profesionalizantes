@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core'
+import { HttpService } from '../http-service.service';
 
 @Component({
   selector: 'app-menu',
@@ -7,31 +8,40 @@ import { Component } from '@angular/core';
 })
 export class MenuComponent {
   logeado: boolean
-  public constructor(){
+  error: string
+  eventos: any
+  public constructor(private renderer: Renderer2, private http: HttpService) {
     this.logeado = false
+    this.error = ""
+    this.eventos = "" 
   }
 
-  ngOnInit(){
-    /*let logeadoStr = localStorage.getItem("logeadoStr") || ""
-    if(logeadoStr === "t"){
-      this.logeado = true
-    }
-    else{
-      console.log(logeadoStr)
-      this.logeado = false
-    }
-
-    console.log(this.logeado)*/
-    if (localStorage.getItem("clave")===null){
-      this.logeado = false
-    }
-    else{
-      this.logeado = true
-    }
-    console.log(this.logeado)
+  generarEventos() {
+    console.log("eventos:    " + this.eventos)
   }
 
-  public logOut(){
+  ngOnInit() {
+    if (localStorage.getItem("clave") === null) {
+      this.logeado = false
+    }
+    else {
+      this.logeado = true
+      var clave = localStorage.getItem("clave")
+      //@ts-ignore
+      this.http.getEventos(clave).subscribe({
+        next:(data) =>{
+          this.eventos = data
+        },
+        error: (error)=>{
+          this.error = error.error
+        }
+      })
+    }
+  } 
+
+  
+
+  public logOut() {
     localStorage.removeItem("clave")
     this.logeado = false;
   }

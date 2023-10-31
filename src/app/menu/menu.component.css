@@ -1,0 +1,49 @@
+li{
+    cursor:pointer;
+    list-style-type: none;
+    transition: 0.3s;
+}
+
+li:hover{
+    transition:0.3s;
+    scale:1.05;
+}
+
+body{
+    margin:0;
+}
+
+.eventos{
+    width:90vw;
+    padding-top:80PX;
+    margin: 0 5vw;
+}
+.evento{
+    width:500px;
+    display:inline-block;
+    margin:3vw;
+}
+.contenedor{
+    border: solid black 2px;
+    width:500px;
+}
+.imgEvento{
+    vertical-align: middle;
+    display:inline-block;
+    width:300px;
+    height:300px;
+    border-right: black solid 2px;
+    margin: 0 10px;
+}
+.infoEvento{
+    font-size:24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+.contInfo{
+    padding-left: 5px;
+    display:inline-block;
+    vertical-align: middle;
+    width:150px;
+}

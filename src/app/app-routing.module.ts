@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MenuComponent } from './menu/menu.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
+import { EventoComponent } from './evento/evento.component';
 
 const routes: Routes = [
   {
@@ -18,6 +19,9 @@ const routes: Routes = [
     path: "login",
     component: LoginComponent,
     title: "Inicio Sesion"
+  },{
+    path: "evento/:nombre",
+    component: EventoComponent
   }
 ];
 
