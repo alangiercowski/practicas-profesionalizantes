@@ -1,11 +1,158 @@
 body{
     font-family: 'Montserrat', sans-serif;
 }
+.nav {
+    height: 70px;
+    width: 100%;
+    background-color: #f2f2f0;
+    position: fixed;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+}
+
+.nav>.nav-header {
+    display: inline;
+}
+
+.nav>.nav-header>.nav-title {
+    display: inline-block;
+    font-size: 22px;
+    color: #fff;
+    padding: 10px 10px 10px 10px;
+}
+
+.nav>.nav-btn {
+    display: none;
+}
+
+.nav>.nav-links {
+    display: inline;
+    margin-left: auto;
+    margin-right: 0;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.nav>.nav-links>a {
+    display: inline-block;
+    height: 70px;
+    text-align: center;
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    text-decoration: none;
+    color: black;
+}
+
+.nav>.nav-links>a:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.nav>#nav-check {
+    display: none;
+}
+
+input {
+    margin-left: 20px;
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 5px;
+    background-color: #f2f2f0;
+    border-color: black;
+    border-color: 5px;
+}
+
+input:focus {
+    outline: none;
+}
+
+@media (max-width: 540px) {
+    .nav{
+        height: 70px;
+    }
+    #imagenLogo{
+        display: block;
+    }
+    input{
+        margin-top: 20px;
+        margin-left: 0px;
+        min-width: 80vw;
+    }
+    button{
+        min-width: 80vw;
+    }
+    p{
+        align-items: center;
+    }
+
+    #divMayor{
+        height: 120px;
+        box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.10);
+    }
+    .nav{
+        box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.10);
+    }
+}
+
+@media (max-width:800px) {
+    .nav>.nav-btn {
+        display: inline-block;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+    }
+
+    .nav>.nav-btn>label {
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        padding: 13px;
+    }
+
+    .nav>.nav-btn>label:hover,
+    .nav #nav-check:checked~.nav-btn>label {
+        background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .nav>.nav-btn>label>span {
+        display: block;
+        width: 25px;
+        height: 10px;
+        border-top: 2px solid #eee;
+    }
+
+    .nav>.nav-links {
+        position: absolute;
+        display: block;
+        width: 100%;
+        background-color: rgb(221, 219, 219);
+        height: 0px;
+        transition: all 0.3s ease-in;
+        overflow-y: hidden;
+        top: 50px;
+        left: 0px;
+        margin-top: 70px;
+    }
+
+    .nav>.nav-links>a {
+        display: block;
+        width: 100%;
+    }
+
+    .nav>#nav-check:not(:checked)~.nav-links {
+        height: 0px;
+    }
+
+    .nav>#nav-check:checked~.nav-links {
+        height: calc(100vh - 50px);
+        overflow-y: auto;
+    }
+}
 .usuarios-container {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     align-items: center;
     height: 50vh;
+    margin-top: 100px;
 }
 input{
     font-size: large;
@@ -15,14 +162,13 @@ input{
     margin: auto;
     display: grid ;
     place-items: center;
-    
     height: 100px;
     width: 100vw;
-
     color: #333;
+    margin-bottom: 400px;
 }
 #name, #password, #mail, #foto{
-    height: 7.5vh;
+    height: 50px;
     width: 30vw;
     margin-bottom: 1vh;
 }
@@ -33,7 +179,7 @@ input{
     border-radius: 20px;
     transition: ease-in-out .3s;
     background-color: white;
-    height: 5vh;
+    height: 20px;
     width: 5vw;
 }
 #btn-menu:hover{
@@ -44,9 +190,9 @@ input{
 }
 
 #btn{
-    height: 7.5vh;
+    height: 50px;
     width: 30.6vw;
-    font-size: 1.3vw;
+    font-size: large;
     transition: ease-in-out .3s;
     margin-bottom: 5vh;
     background-color: white;
@@ -60,4 +206,7 @@ input{
 #link{
     text-decoration: none;
     color: black;
+ }
+ .foto{
+    max-width: 7.5vh;
  }
