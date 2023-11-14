@@ -1,17 +1,32 @@
 <!DOCTYPE html>
 <html>
-<app-navbar></app-navbar>
 
 <body>
-    <p>nombre: {{eventoLocal.nombre}}</p>
-    <p>fecha: {{eventoLocal.fecha}}</p>
-    <p>fecha cierre: {{eventoLocal.fechaCierreConvocatoria}}</p>
-    <p>lugar desarrollo:</p>
-    <b>subdivision: {{eventoLocal.lugarDesarrollo.direccion}}</b><br>
-    <b>foto: {{eventoLocal.lugarDesarrollo.foto}}</b><br>
-    <b>nombre lugar: {{eventoLocal.lugarDesarrollo.nombre}}</b><br>
-    <p>tags: {{eventoLocal.tags}}</p>
-    <p>usuarios: {{eventoLocal.usuarios}}</p>
+    <app-navbar></app-navbar>
+
+    <div id="todo">
+        <div id="fotoDatos">
+            <img id="foto" src="{{fotoLugar}}" alt="">
+            <div id="datos">
+                <h2 class="textoDatos">{{nombre}}</h2>
+                <h3 class="textoDatos">Fecha del evento: {{fecha}}</h3>
+                <h4 class="textoDatos">{{nombreLugar}}</h4>
+                <h4 class="textoDatos">Direccion: {{direccion}}</h4>
+            </div>
+        </div>
+        <div id="tags">
+            <h5 id="tag" *ngFor="let tag of tags; let i = index" [attr.data-index]="i">{{tag}}</h5>
+        </div>
+        <p id="descripcion">{{descripcion}}</p>
+        <div id="cierreAportar">
+            <p id="cierre">Cierre aporte: {{fechaConvocatoria}}</p>
+            <div style="display: flex; padding-right: 10px;">
+                <p *ngIf="click" id="errorLogin">Inicie sesion</p>
+                <button *ngIf="login" id="aportar">Aportar</button>
+                <button (click)="click = true" *ngIf="!login" id="noAportar">Aportar</button>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
