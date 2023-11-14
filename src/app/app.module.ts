@@ -6,17 +6,28 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MenuComponent } from './menu/menu.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { EventoComponent } from './evento/evento.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatOptionModule } from '@angular/material/core';
+import { MatLabel } from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    MenuComponent
+    MenuComponent,
+    NavbarComponent,
+    EventoComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatIconModule,
+    MatOptionModule,
+    MatSelectModule,
     HttpClientModule
   ],
   providers: [],

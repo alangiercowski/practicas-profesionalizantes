@@ -9,12 +9,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   error: String
+  temp: number
 
   constructor(private http: HttpService, private router: Router){
     this.error=""
+    this.temp = 0
+  }
+
+  ngOnInit(){
+    console.log(innerWidth)
+    this.temp = innerHeight
   }
 
   public login(nombre: String, pw: String){
+    if(nombre == "" || pw == ""){
+      this.error = "Faltan datos"
+      return 0
+    }
     var cuerpo = {
       nombre: nombre,
       contraseña: pw

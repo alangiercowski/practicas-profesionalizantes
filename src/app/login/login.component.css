@@ -26,8 +26,8 @@ input {
 
 #nombre,
 #pw {
-    height: 7.5vh;
-    width: 30vw;
+    height: 40px;
+    width: 500px;
     margin-bottom: 1vh;
 }
 
@@ -50,16 +50,21 @@ input {
     cursor: pointer;
 }
 
-#btn {
-    height: 7.5vh;
-    width: 30.6vw;
-    font-size: 1.3vw;
-    transition: ease-in-out .3s;
-    margin-bottom: 2vh;
+.btn {
+    height: 40px;
+    width: 200px;
+    float: right;
+    font-size: 20px;
     background-color: white;
+    margin: 55px;
+    margin-top: 10px;
+    margin-bottom: 0;
+
+    border-style: solid;
+
 }
 
-#btn:hover {
+.btn:hover {
     color: white;
     background-color: black;
     transition: ease-in-out .3s;
@@ -71,7 +76,7 @@ input {
     color: black;
 }
 
-#btn-register {
+#btn-login {
     height: 5.5vh;
     width: 13vw;
     font-size: 1.3vw;
@@ -79,15 +84,45 @@ input {
     background-color: white;
 }
 
-#btn-register:hover {
+#btn-login:hover {
     color: white;
     background-color: black;
     transition: ease-in-out .3s;
     cursor: pointer;
 }
 
-#error{
+#error {
     color: red;
-    font-size:24px;
+    font-size: 24px;
     text-decoration: underline solid red 3px;
+}
+
+@media (max-height: 290px) {
+    #title {
+        margin-top: 0;
+    }
+}
+
+@media (max-height: 240px) {
+
+    #nombre,
+    #pw {
+        margin-bottom: 5px;
+        height: 20px;
+        width: 90vw;
+    }
+
+    .btn {
+        height: 40px;
+        width: 40vw;
+        float: right;
+        font-size: 20px;
+        background-color: white;
+        margin: 5vw;
+        margin-top: 10px;
+        margin-bottom: 0;
+    
+        border-style: solid;
+    
+    }
 }

@@ -1,0 +1,56 @@
+li{
+    cursor:pointer;
+    list-style-type: none;
+    transition: 0.3s;
+}
+
+li:hover{
+    transition:0.3s;
+    scale:1.05;
+}
+
+body{
+    margin:0;
+}
+
+.eventos{
+    text-align: center;
+    width:90vw;
+    padding-top:80px;
+    margin: 0 5vw;
+}
+.evento{
+    width:500px;
+    display:inline-block;
+    margin:3vw;
+}
+.contenedor{
+    border: solid black 3px;
+    width:500px;
+}
+.contImagen{
+    display:inline-block;
+    width:45%;
+    height:100%;
+    padding: 0 10px;
+}
+.imgEvento{
+    max-width:100%;
+    max-height: 100%;
+    vertical-align: middle;
+}
+.infoEvento{
+    font-size:24px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    margin:0 5px;
+}
+.contInfo{
+    text-align: left;
+    padding-left: 5px;
+    display:inline-block;
+    vertical-align: middle;
+    border-left: solid black 3px;
+    width:45%;
+}

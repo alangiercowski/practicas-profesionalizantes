@@ -14,6 +14,7 @@ export class RegisterComponent {
     this.error = ""
   }
 
+
   public register(mail: string, pw1: string, pw2: string, nombre: string){
     if(pw1!=pw2){
       this.error = "Las contraseñas no coinciden"

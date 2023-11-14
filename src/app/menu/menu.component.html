@@ -1,3 +1,26 @@
-<button routerLink="/login" *ngIf="!logeado">login</button>
-<button routerLink="/register" *ngIf="!logeado">register</button>
-<button *ngIf="logeado" (click)="logOut()">Cerrar sesión</button>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+    <app-navbar></app-navbar>
+    <div class="eventos">
+        <div *ngFor="let item of eventos; let i = index" [attr.data-index]="i" class="evento">
+            <li [routerLink]="['/evento', eventos[i].nombre]" #idPublicacion value="eventos[i].id" list-style-type="none">
+                <div class="contenedor">
+                    <div class="contImagen">
+                        <img src="../../assets/UTN-logo.png" class="imgEvento">
+                    </div>
+                    <div class="contInfo">
+                        <p class="infoEvento">{{eventoLocal.nombre}}</p>
+                        <p class="infoEvento">{{eventoLocal.fecha}}</p>
+                        <p class="infoEvento">{{eventoLocal.lugarDesarrollo.direccion}}</p>
+                        <div *ngFor="let tag of eventoLocal.tags; let j = index" [attr.data-index]="j">
+                            <p class="infoEvento">{{eventoLocal.tags[j]}}</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+        </div>
+    </div>
+</body>
