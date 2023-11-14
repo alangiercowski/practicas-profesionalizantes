@@ -77,7 +77,7 @@
           <tr *ngFor="let item of listaInvestigadores; let i = index" [attr.data-index]="i">
             <td>{{listaInvestigadores[i].nombre}}</td>
             <td>{{listaInvestigadores[i].correo}}</td>
-            <td> <img class="foto" [src]="sanitizer.bypassSecurityTrustUrl(listaInvestigadores[i].fotoPerfil)"></td>
+            <td> <img class="foto" src="urlApi + listaLugares[i].fotoPerfil"></td>
           </tr>
         </tbody>
       </table>
@@ -122,7 +122,7 @@
           <tr *ngFor="let item of listaInvestigadores; let i = index" [attr.data-index]="i">
             <td>{{listaInvestigadores[i].nombre}}</td>
             <td>{{listaInvestigadores[i].correo}}</td>
-            <td> <img class="foto" [src]="sanitizer.bypassSecurityTrustUrl(listaInvestigadores[i].fotoPerfil)"></td>
+            <td> <img class="foto" src="urlApi + listaLugares[i].fotoPerfil"></td>
           </tr>
         </tbody>
       </table>
@@ -141,27 +141,53 @@
     </div>
     <div class="usuarios">
       <p id="title">Borrar lugar</p>
-      <input #lugarBorrar id="name" placeholder="Nombre">
+      <input #lugarBorrar id="name" placeholder="Id">
       <button (click)="borrarLugar(lugarBorrar.value)" id="btn">Borrar lugar</button>
       <p>{{mensajeBorrarLugar}}</p>
     </div>
     <div style="margin-top: -200px;" class="usuarios">
-      <p id="title">Ver Investigadores</p>
-      <button (click)="verInvestigadores()" id="btn">Ver Investigadores</button>
-      <table *ngIf=getInvestigadores>
+      <p id="title">Ver lugar</p>
+      <input #lugarVer id="name" placeholder="Id">
+      <button (click)="getLugar(lugarVer.value)" id="btn">Ver lugar</button>
+      <table *ngIf=getListaLugar>
         <thead>
           <tr>
+            <th>Id</th>
             <th>Nombre</th>
-            <th>Correo</th>
-            <th>Foto de perfil</th>
+            <th>Direccion</th>
+            <th>Foto</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of listaInvestigadores; let i = index" [attr.data-index]="i">
-            <td>{{listaInvestigadores[i].nombre}}</td>
-            <td>{{listaInvestigadores[i].correo}}</td>
-            <td> <img class="foto" [src]="sanitizer.bypassSecurityTrustUrl(listaInvestigadores[i].fotoPerfil)"></td>
+          <tr>
+            <td>{{lugar.lugar._id}}</td>
+            <td>{{lugar.lugar.nombre}}</td>
+            <td>{{lugar.lugar.direccion}}</td>
+            <td> <img class="foto" src="{{urlApiImagenes}}{{lugar.lugar.fotoLugar}}"></td>
+          </tr> 
+        </tbody>
+      </table>
+      <p>{{mensajeVerLugar}}</p>
+    </div>
+    <div style="margin-top: -200px;" class="usuarios">
+      <p id="title">Ver lugares</p>
+      <button (click)="getLugares()" id="btn">Ver lugares</button>
+      <table *ngIf=getListaLugares>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Direccion</th>
+            <th>Foto</th>
           </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listaLugares.lugares; let i = index" [attr.data-index]="i">
+            <td>{{listaLugares.lugares[i]._id}}</td>
+            <td>{{listaLugares.lugares[i].nombre}}</td>
+            <td>{{listaLugares.lugares[i].direccion}}</td>
+            <td> <img class="foto" src="{{urlApiImagenes}}{{listaLugares.lugares[i].fotoLugar}}"></td>
+          </tr> 
         </tbody>
       </table>
     </div>

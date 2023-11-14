@@ -9,27 +9,35 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HomeComponent {
 
+  urlApiImagenes = 'http://172.16.255.233:3000/imagenes/';
   logeado: boolean;
   usuarios: boolean;
   eventos: boolean;
   admins: boolean;
+  mensajeVerLugar: string;
   lugares: boolean;
+  lugar: any;
   botonAdmins: boolean
+  getListaLugar: boolean;
   mensajeIngresoUsuario: string;
   mensajeBorrarUsuario: string;
   getInvestigadores: boolean;
   getAdministradores: boolean;
+  getListaLugares: boolean;
   listaInvestigadores: any;
   listaAdministradores: any;
+  listaLugares: any;
   esSuper: boolean;
   mensajeIngresoLugares: string;
+  mensajeGetLugares: boolean;
   selectedPhoto!: File;
   selectedPhotoLugar!: File;
   mensajeBorrarLugar: string;
 
-  constructor(private http: HttpService, public sanitizer: DomSanitizer) {
+  constructor(private http: HttpService) {
     this.logeado = false
     this.usuarios = false
+    this.getListaLugar = false
     this.eventos = false
     this.admins = false
     this.botonAdmins = false
@@ -41,7 +49,9 @@ export class HomeComponent {
     this.lugares = false
     this.mensajeIngresoLugares = ""
     this.mensajeBorrarLugar = ""
-
+    this.getListaLugares = false
+    this.mensajeGetLugares = false
+    this.mensajeVerLugar = ""
 
   }
 
@@ -128,6 +138,7 @@ export class HomeComponent {
     }
 
   borrarLugar(nombre: string) {
+    console.log(nombre)
     return this.http.borrarLugar(nombre).subscribe({
       next: (data) => {
         console.log(data)
@@ -261,5 +272,43 @@ export class HomeComponent {
     }
 
     return 0
+  }
+  getLugares(){
+    if (this.getListaLugares) {
+      this.getListaLugares = false;
+    }
+    else {
+      this.getListaLugares = true;
+    }
+    return this.http.getLugares().subscribe({
+      next: (data) => {
+        if(JSON.parse(JSON.stringify(data)).lugares == null){
+          this.mensajeGetLugares = true
+        }
+        console.log(data)
+        this.listaLugares = data
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
+  getLugar(id: any){
+    if(this.getListaLugar){
+      this.getListaLugar = false
+    }
+    else{
+      this.getListaLugar = true
+    }
+    return this.http.getLugar(id).subscribe({
+      next: (data) => {
+        this.lugar = data 
+        console.log(data)
+      },
+      error: (error) => {
+        console.log(error)
+        this.mensajeVerLugar = error.error
+      }
+    })
   }
 }

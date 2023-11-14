@@ -47,4 +47,10 @@ export class HttpService {
   borrarLugar(nombre: any){
     return this.http.delete(this.urlApi + "/lugares/" + nombre,{headers: {Authorization: localStorage["clave"]}});
   }
+  getLugares(){
+    return this.http.get(this.urlApi + "/lugares",{headers: {Authorization: localStorage["clave"]}});
+  }
+  getLugar(id: any){
+    return this.http.get(this.urlApi + "/lugares/" + id,{headers: {Authorization: localStorage["clave"]}});
+  }
 }
