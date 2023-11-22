@@ -17,6 +17,7 @@ export class HomeComponent {
   logeado: boolean;
   usuarios: boolean;
   evento: any;
+  mensajeModificarEstado: string = "";
   listaTags: Array<string> = [];
   values: string[] = [''];
   mensajeIngresoAdmin: string;
@@ -79,7 +80,8 @@ export class HomeComponent {
 
   }
   
-
+  estadoSeleccionado: string = '';
+  opciones: string[] = ['APROBADO', 'APROBADO_ASISTENCIA', 'RECHAZADO'];
   onFileSelected(event: any) {
     this.selectedPhoto = event.target.files[0];
   }
@@ -314,6 +316,28 @@ export class HomeComponent {
     const indiceSeleccionado = event.target.value;
     console.log("Opción seleccionada:", this.listaDelugares[indiceSeleccionado]);
     this.lugarSeleccionado = this.listaDelugares[indiceSeleccionado];
+  }
+  seleccionarEstado(event: any) {
+    const indiceSeleccionado = event.target.value;
+    console.log("Opción seleccionada:", this.opciones[indiceSeleccionado]);
+    this.estadoSeleccionado = this.opciones[indiceSeleccionado];
+  }
+  cambiarEstado(id: any, nombre: any) {
+    var body = {
+      estado: this.estadoSeleccionado,
+      nombre: nombre
+    }
+    return this.http.actualizarEstado(id, body).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.mensajeModificarEstado = "Estado modificado correctamente"
+      },
+      error: (error) => {
+        console.log(error)
+        this.mensajeModificarEstado = error.error
+      }
+    })
+
   }
   ingresarLugar(nombre: any, direccion: any){
 

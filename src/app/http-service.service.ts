@@ -72,4 +72,7 @@ export class HttpService {
   getLugarXNombre(nombre: any){
     return this.http.get(this.urlApi + "/lugaresXnombre/" + nombre,{headers: {Authorization: localStorage["clave"]}});
   }
+  actualizarEstado(id: any, cuerpo: any){
+    return this.http.patch(this.urlApi + "/eventos/estado/" + id, cuerpo,{headers: {Authorization: localStorage["clave"]}});
+  }
 }

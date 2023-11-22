@@ -153,7 +153,13 @@
                 <p>Autor: {{contribucion.nombreUsuario}}</p>
                 <p>{{contribucion.descripcion}}</p>
                 <p>Contribucion: <a href={{urlApiArchivos}}{{contribucion.contribucion}}>{{urlApiArchivos}}{{contribucion.contribucion}}</a></p>
-            </div>
+                <p>{{contribucion.estado}}</p>
+                <select id="lugares" name="lugares" (change)="seleccionarEstado($event)">
+                  <option *ngFor="let opcion of opciones; let i = index" [value]="i">{{ opcion }}</option>
+                </select><br>
+                <button (click)="cambiarEstado(evento._id, contribucion.nombreUsuario)" id="btn">Cambiar estado</button>
+                {{mensajeModificarEstado}}
+              </div>
       </div>
     </div>
     <div class="usuarios">
