@@ -9,14 +9,17 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class HomeComponent {
 
-  urlApiImagenes = 'http://172.16.255.233:3000/imagenes/';
+  urlApiImagenes = 'http://localhost:3000/imagenes/';
   logeado: boolean;
   usuarios: boolean;
+  mensajeIngresoAdmin: string;
   eventos: boolean;
   admins: boolean;
+  direccionSeleccionada: string = '';
   mensajeVerLugar: string;
   lugares: boolean;
   lugar: any;
+  listaDelugares: any;
   botonAdmins: boolean
   getListaLugar: boolean;
   mensajeIngresoUsuario: string;
@@ -30,6 +33,7 @@ export class HomeComponent {
   esSuper: boolean;
   mensajeIngresoLugares: string;
   mensajeGetLugares: boolean;
+  mensajeModificarUsuario: string;
   selectedPhoto!: File;
   selectedPhotoLugar!: File;
   mensajeBorrarLugar: string;
@@ -37,7 +41,9 @@ export class HomeComponent {
   constructor(private http: HttpService) {
     this.logeado = false
     this.usuarios = false
+    this.direccionSeleccionada = '';
     this.getListaLugar = false
+    this.mensajeIngresoAdmin = "",
     this.eventos = false
     this.admins = false
     this.botonAdmins = false
@@ -47,6 +53,7 @@ export class HomeComponent {
     this.esSuper = false
     this.getAdministradores = false
     this.lugares = false
+    this.mensajeModificarUsuario = "";
     this.mensajeIngresoLugares = ""
     this.mensajeBorrarLugar = ""
     this.getListaLugares = false
@@ -197,13 +204,36 @@ export class HomeComponent {
     return this.http.ingresarAdministrador(body).subscribe({
       next: (data) => {
         console.log(data)
-        this.mensajeIngresoUsuario = "Administrador ingresado correctamente"
+        this.mensajeIngresoAdmin = "Administrador ingresado correctamente"
       },
       error: (error) => {
         console.log(error)
-        this.mensajeIngresoUsuario = error.error
+        this.mensajeIngresoAdmin = error.error
       }
     })
+  }
+  modificarInvestigador(nombre: string, correo: string, contraseña: string) {
+      
+      var body = {
+        correo: correo,
+        contraseña: contraseña
+      }
+  
+      return this.http.modificarUsuario(nombre, body).subscribe({
+        next: (data) => {
+          console.log(data)
+          this.mensajeModificarUsuario = "Investigador modificado correctamente"
+        },
+        error: (error) => {
+          console.log(error)
+          this.mensajeModificarUsuario = error.error
+        }
+      })
+  }
+  seleccionarOpcion(event: any) {
+    const indiceSeleccionado = event.target.value;
+    console.log("Opción seleccionada:", this.listaDelugares[indiceSeleccionado]);
+    this.direccionSeleccionada = this.listaDelugares[indiceSeleccionado];
   }
   ingresarLugar(nombre: any, direccion: any){
 

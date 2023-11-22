@@ -169,7 +169,7 @@ input{
 }
 #name, #password, #mail, #foto{
     height: 50px;
-    width: 30vw;
+    width: 500px;
     margin-bottom: 1vh;
 }
 #title{
@@ -191,7 +191,7 @@ input{
 
 #btn{
     height: 50px;
-    width: 30.6vw;
+    width: 500px;
     font-size: large;
     transition: ease-in-out .3s;
     margin-bottom: 5vh;

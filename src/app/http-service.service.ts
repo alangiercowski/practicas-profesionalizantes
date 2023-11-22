@@ -8,7 +8,7 @@ providedIn:  'root'
 
 export class HttpService {
 
-  private urlApi = 'http://172.16.255.233:3000';
+  private urlApi = 'http://localhost:3000';
 
   constructor(private http: HttpClient) { }
 
@@ -30,6 +30,10 @@ export class HttpService {
 
   verUsuarios(){
     return this.http.get(this.urlApi + "/investigadores",{headers: {Authorization: localStorage["clave"]}});
+  }
+
+  modificarUsuario(nombre:any, cuerpo: any){
+    return this.http.patch(this.urlApi + "/investigadores/" + nombre, cuerpo, {headers: {Authorization: localStorage["clave"]}});
   }
 
   ingresarAdministrador(cuerpo: any){
