@@ -60,7 +60,7 @@ export class HttpService {
   }
 
   getLugarEvento(idLugar: string){
-    return this.http.get(this.urlApi + "/lugares/" + idLugar)
+    return this.http.get(this.urlApi + "/lugaresXnombre/" + idLugar)
   }
 
   subirAporte(cuerpo: any, clave: string){
@@ -69,7 +69,7 @@ export class HttpService {
   }
 
   getUserData(clave: string, nombreUsuario: string){
-    return this.http.get(this.urlApi + "/investigadores/"+nombreUsuario,{"headers":{"Authorization":clave}})
+    return this.http.get(this.urlApi + "/investigadoresInv/"+nombreUsuario,{"headers":{"Authorization":clave}})
   }
 
   editarUsuario(cuerpo:any, clave:string){

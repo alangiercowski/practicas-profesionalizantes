@@ -62,7 +62,9 @@ export class EventoComponent {
         this.fechaConvocatoria = evento.fechaCierreConvocatoria;
         this.descripcion = evento.descripcion;
 
-        this.http.getLugarEvento(evento.lugar).subscribe({
+        console.log(evento)
+
+        this.http.getLugarEvento(evento.lugarDesarrollo).subscribe({
           next: (dataLugar) => {
             let lugar = JSON.parse(JSON.stringify(dataLugar));
             const rutaImagenes = lugar.urlImagenes;
@@ -70,6 +72,8 @@ export class EventoComponent {
 
             this.direccion = lugar.direccion;
             this.nombreLugar = lugar.nombre;
+            console.log(rutaImagenes);
+            console.log(lugar.fotoLugar)
             this.fotoLugar = rutaImagenes + lugar.fotoLugar;
           },
           error: (error) => {

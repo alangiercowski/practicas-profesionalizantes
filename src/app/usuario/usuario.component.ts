@@ -62,6 +62,7 @@ export class UsuarioComponent {
     this.http.getUserData(localStorage.getItem("clave")!, localStorage.getItem("nombreUsuario")!).subscribe({
       next: (data: any) => {
         this.usuario = data;
+        console.log(this.usuario)
         if(this.usuario.fotoPerfil == ""){
           console.log("no tiene foto")
           this.fotoPerfil="../../assets/fotoDefault.webp"
