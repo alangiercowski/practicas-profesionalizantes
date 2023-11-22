@@ -12,6 +12,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatOptionModule } from '@angular/material/core';
 import { MatLabel } from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {MatSelectModule} from '@angular/material/select';
     RegisterComponent,
     MenuComponent,
     NavbarComponent,
-    EventoComponent
+    EventoComponent,
+    UsuarioComponent
   ],
   imports: [
     BrowserModule,

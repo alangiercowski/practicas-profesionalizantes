@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link
+     rel="stylesheet"
+     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
+   />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+<div class="dataPerfil">
+    <mat-icon id="iconoEditarPerfil" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
+    <img src="{{fotoPerfil}}" class="fotoPerfil">
+    <div class="descPerfil">
+        <div class="containerInfo">
+            <p id="nombre"><mat-icon>account_circle</mat-icon></p>
+            <p class="infoPerfil">{{usuario.nombre}}</p>
+        </div>
+        <div class="containerInfo">
+            <p id="correo"><mat-icon> email</mat-icon></p>
+            <p class="infoPerfil">{{usuario.correo}}</p>
+        </div>
+        <div class="containerInfo" style="margin-left: 10px; margin-bottom: 5px;">
+            <input *ngIf="editar" class="infoPerfil" #correoModificar placeholder="{{usuario.correo}}">
+        </div>
+        <div class="containerInfo" style="margin-left: 10px; margin-bottom: 5px;">
+            <input *ngIf="editar" class="infoPerfil" #pwModificar placeholder="Cambie aquí la contraseña">
+        </div>
+        <input style="margin-left: 10px; margin-bottom: 5px;" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file" title="Elija una imagen" /><br>
+        <mat-icon id="iconoEditarPerfil" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
+        <mat-icon id="iconoEditarPerfil" (click)="modificarUsuario()" *ngIf="editar">done</mat-icon>
+    </div>
+</div>
+
+<p class="titulo">Tus aportes</p>
+<div class="publicaciones">
+    <div *ngFor="let item of aportesUsuario; let i = index" [attr.data-index]="i" class="item">
+        <a class="publicacion" [routerLink]="['../','publicacion', aportesUsuario[i].id]">
+            <div class="texto">
+                <p class="tItem">{{aportesUsuario[i].titulo}}</p>
+                <p class="pItem">{{aportesUsuario[i].descripcion}}</p>
+                <p class="arItem">{{aportesUsuario[i].contribucion}}</p>
+            </div>
+        </a>
+    </div>
+</div>

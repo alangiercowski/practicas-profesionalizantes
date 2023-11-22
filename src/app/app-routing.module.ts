@@ -4,6 +4,7 @@ import { MenuComponent } from './menu/menu.component';
 import { RegisterComponent } from './register/register.component';
 import { LoginComponent } from './login/login.component';
 import { EventoComponent } from './evento/evento.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
   },{
     path: "evento/:nombre",
     component: EventoComponent
+  },
+  {
+    path: "usuario",
+    component:UsuarioComponent
   }
 ];
 

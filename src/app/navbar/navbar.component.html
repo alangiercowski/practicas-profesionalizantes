@@ -13,7 +13,7 @@
         <div class="nav-header">
           <div class="nav-title">
             <img routerLink="" id="imagenLogo" src="../../assets/UTN-logo.png" style="width: 150px;">
-            <input #busquedaBarra class="busquedaBarra" placeholder="Buscar...">
+            <input #busquedaBarra class="busquedaBarra" placeholder="Buscar..." value={{tagsPuestos}}>
             <mat-icon class="iconoBusqueda" (click)="buscarPorTags(busquedaBarra.value)">search</mat-icon>
           </div>
         </div>
@@ -30,6 +30,7 @@
           <a routerLink="/login" *ngIf="!logeado">Inicio Sesion</a>
           <a routerLink="/register" *ngIf="!logeado">Registro</a>
           <a *ngIf="logeado" (click)="logOut()">Cerrar Sesión</a>
+          <a *ngIf="logeado" routerLink="/usuario">perfil</a>
         </div>
       </div>
     </body>

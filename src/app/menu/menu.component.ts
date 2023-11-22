@@ -1,5 +1,6 @@
-import { Component, ElementRef, ViewChild, Renderer2 } from '@angular/core'
+import { Component, ElementRef, ViewChild, Renderer2 , HostListener} from '@angular/core'
 import { HttpService } from '../http-service.service';
+import { subscribeOn } from 'rxjs';
 
 @Component({
   selector: 'app-menu',
@@ -7,29 +8,28 @@ import { HttpService } from '../http-service.service';
   styleUrls: ['./menu.component.css']
 })
 export class MenuComponent {
+  tags: any
+  url: any
   logeado: boolean
   error: string
   eventos: any
-  eventoLocal: any
+  hayMas: boolean
+  pagina: number = 0
+  cantPagina: number = 8
   public constructor(private renderer: Renderer2, private http: HttpService) {
     this.logeado = false
     this.error = ""
-    this.eventos = ""
-    this.eventoLocal = {
-      nombre: "local cuyo nombre es tan largo que no entra",
-      fecha: "2000-01-21",
-      fechaCierreConvocatoria: "2001-01-21",
-      tags: ["a", "b", "c", "d"],
-      usuarios: ["1", "2"],
-      lugarDesarrollo: {
-        direccion: "dir",
-        foto: "ruta",
-        nombre: "nombreLugar"
-      }
-    }
+    this.eventos = []
+    this.hayMas = true
   }
 
   ngOnInit() {
+    this.setLogeado()
+    this.getTags()
+    this.getEventos()
+  }
+
+  setLogeado() {
     if (localStorage.getItem("clave") === null) {
       this.logeado = false
     }
@@ -37,12 +37,25 @@ export class MenuComponent {
       this.logeado = true
       var clave = localStorage.getItem("clave")
     }
+  }
+
+  async getTags() {
+    return this.http.getTags().subscribe({
+      next: (data) => {
+        this.tags = data
+      },
+      error: (error) => {
+        this.error = error.error
+      }
+    })
+  }
+
+  async getEventos() {
     if (localStorage.getItem("tags") === null || localStorage.getItem("tags") == "") {
-      //@ts-ignore
-      this.http.getEventos().subscribe({
-        next: (data) => {
-          this.eventos = data
-          console.log(data)
+      await this.http.getEventos(this.pagina).subscribe({
+        next: (data: any) => {
+          this.hayMas = data.hayMas
+          this.setLugaresEventos(data.eventos)
         },
         error: (error) => {
           this.error = error.error
@@ -50,24 +63,70 @@ export class MenuComponent {
       })
     }
     else {
-      //@ts-ignore
-      this.http.getEventosTags(localStorage.getItem("tags")).subscribe({
-        next: (data) => {
-          this.eventos = data
-          console.log(data)
+      await this.http.getEventosTags(localStorage.getItem("tags"), this.pagina).subscribe({
+        next: (data: any) => { 
+          if(data === null){
+          }
+          else{
+            console.log("la data que llega")
+            console.log(data)
+            this.hayMas = data.hayMas
+            this.setLugaresEventos(data.eventos)
+          }
+          return 0
         },
         error: (error) => {
           this.error = error.error
         }
       })
     }
+  }
 
+  setLugaresEventos(eventos: any){
+    for (let i = 0; i < eventos.length; i++) {
+      this.http.getLugarEvento(eventos[i].lugar).subscribe({
+        next: (data: any) => {
+          this.url = data.urlImagenes
+          let lugar = data.lugar.direccion
+          eventos[i].nombreLugar = lugar
+          let foto = data.lugar.fotoLugar
+          eventos[i].fotoLugar = this.url+foto
+        },
+        error: (error) => {
+          error = error.error
+        }
+      })
+    }
+    this.eventos = this.eventos.concat(eventos)
   }
 
 
 
+
+  public sumarTag(tag: string) {
+    this.pagina = 0;
+    let tagsAct = localStorage.getItem("tags")
+    if (tagsAct?.charAt(tagsAct.length) == "," || tagsAct == "") {
+      localStorage.setItem("tags", (tagsAct + tag))
+    }
+    else {
+      localStorage.setItem("tags", (tagsAct + "," + tag))
+    }
+    this.update()
+  }
+
   public logOut() {
     localStorage.removeItem("clave")
     this.logeado = false;
+  }
+
+  update(){
+    this.eventos = []
+    this.ngOnInit()
+  }
+
+  cargarMas(){
+    this.pagina++
+    this.getEventos()
   }
 }

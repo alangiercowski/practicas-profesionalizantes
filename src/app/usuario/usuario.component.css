@@ -1,0 +1,226 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+hr {
+    max-width: 80vw;
+}
+
+.dataPerfil {
+    display: flex;
+    width: 60vw;
+    padding: 10vh;
+    margin: 10vh auto;
+    border-radius: 75px;
+    border:solid black 4px;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.contenedorImagen {
+    justify-content: center;
+    display: flex;
+
+}
+
+.imagenItem {
+    text-align: center;
+    object-fit: cover;
+    height: 200px;
+    max-height: 150px;
+    width: 275px;
+    border-radius: 20px 0px 0px 20px;
+
+}
+
+#iconoEditarPerfil {
+    cursor: pointer;
+}
+.btn-forms {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    margin: 30px;
+    position: relative;
+    color: black; /* Color inicial del texto */
+    text-decoration: none; /* Elimina el subrayado predeterminado */
+    transition: color 0.3s; /* Animación para el cambio de color del texto */
+  }
+  
+  .btn-forms::before {
+    content: "";
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #07b140; /* Color del subrayado */
+    transition: width 0.2s; /* Animación para el crecimiento del subrayado */
+  }
+  
+  .btn-forms:hover::before,
+  .btn-forms:focus::before {
+    width: 100%;
+  }
+  
+
+.publicacion {
+    align-items: center;
+    text-decoration: none;
+    color: #000;
+    width:100%;
+    box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.2);
+    margin: 1vw 1vw;
+    margin-bottom: 4vh;
+    border-radius: 20px;
+}
+
+.fotoPerfil {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    margin: 0 3vw;
+}
+
+.descPerfil {
+    font-size: x-large;
+    margin: 0 3vw;
+}
+
+.icono {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-bottom: 2vh;
+}
+
+textarea {
+    resize: none;
+}
+
+.item {
+    display: flex;
+    width:70vw;
+    font-size: xx-large;
+    margin: auto;
+    text-align: center;
+}
+.itemBtn{
+   border: none;
+    background-color: transparent;
+    cursor: pointer;
+    margin-top: 10vh;
+    max-height: 10px;
+}
+
+.mat-icon {
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.err {
+    font-size: 18px;
+}
+
+.containerInfo {
+    display: flex;
+}
+
+.infoPerfil {
+    width:15vw;
+    padding-bottom: 2px;
+    display: inline;
+}
+
+.formsEditar{
+    padding:2px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20vw;
+    scale: 0.8;
+}
+.formsEditar > button{
+    cursor: pointer;
+    background-color: transparent;
+    border: #005236 solid 2px;
+    border-radius: 10px;
+    color:#005236;
+    font-size: large;
+    padding: 1vw;
+    transition: .2s;
+}
+.formsEditar > button:hover{
+    background-color: #005236;
+    color: white;
+}
+
+.titulo {
+    font-size: xx-large;
+    justify-content: center;
+    display: flex;
+}
+
+.tItem {
+    font-size: 36px;
+    margin: 0 10px;
+    margin-bottom: 20px;
+}
+
+.dItem {
+    font-size: 18px;
+    margin: 0 10px;
+    opacity: 0.7;
+}
+.pItem{
+    font-size: 20px;
+    margin: 0 10px;
+    opacity: 0.7;
+    margin-bottom: 20px;
+    display: inline-block;
+}
+
+.forms {
+    margin-bottom: 10vh;
+    width: 100vw;
+    text-align: center;
+}
+
+.tituloForms > input{
+    height: 40px;
+    width: 683px;
+}
+.itemForms{
+    height: 40px;
+    width: 341.5px;
+    padding: 0;
+}
+.dos{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+.descripcionForms{
+    width: 100%;
+    height: 100px;
+    margin-bottom: 5vh;
+}
+.descripcionForms > textarea{
+    width: 683px;
+    height: 100px;
+}
+
+@media(max-width: 900px){
+    .publicacion{
+        width: 90vw;
+    }
+}

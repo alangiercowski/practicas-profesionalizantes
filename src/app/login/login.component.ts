@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpService } from '../http-service.service';
 import { Router } from '@angular/router';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -34,6 +35,9 @@ export class LoginComponent {
       next: (data) =>{
         console.log(data)
         localStorage.setItem("clave", JSON.parse(JSON.stringify(data)).claveJWT)
+        let token = jwtDecode(localStorage.getItem("clave")!) as {nombre : string}
+        let nombreUsuario = token['nombre']
+        localStorage.setItem("nombreUsuario", nombreUsuario)
         //localStorage.setItem("logeadoStr", "t")
         this.router.navigate([""])
       },

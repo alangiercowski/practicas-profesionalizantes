@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -8,13 +8,17 @@ import { Router } from '@angular/router';
 })
 export class NavbarComponent {
   logeado: boolean;
+  tagsPuestos: any
+  nombreUsuario: string
 
   constructor(private router: Router){
     this.logeado = false
+    this.nombreUsuario = ""
   }
 
   ngOnInit() {
-    console.log(localStorage.getItem("clave"))
+    this.nombreUsuario = localStorage.getItem("nombreUsuario")!
+    this.tagsPuestos = localStorage.getItem("tags")
     if (localStorage.getItem("clave") === null) {
       this.logeado = false
     }
@@ -29,7 +33,11 @@ export class NavbarComponent {
   }
 
   public buscarPorTags(tags: string){
+    this.tagsPuestos = tags
     localStorage.setItem("tags", tags)
     this.router.navigate([""])
+    this.actualizar.emit()
   }
+
+  @Output() actualizar = new EventEmitter()
 }

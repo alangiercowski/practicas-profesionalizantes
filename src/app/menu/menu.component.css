@@ -1,10 +1,13 @@
-li{
+p{
+    font-family:Arial, Helvetica, sans-serif
+}
+.evento > li{
     cursor:pointer;
     list-style-type: none;
     transition: 0.3s;
 }
 
-li:hover{
+.evento > li:hover{
     transition:0.3s;
     scale:1.05;
 }
@@ -16,41 +19,96 @@ body{
 .eventos{
     text-align: center;
     width:90vw;
-    padding-top:80px;
     margin: 0 5vw;
 }
 .evento{
-    width:500px;
     display:inline-block;
-    margin:3vw;
+    width:450px;
+    margin:1vw;
 }
-.contenedor{
+.bordeEvento{
+    height:200px;
+    display:flex;
     border: solid black 3px;
-    width:500px;
 }
 .contImagen{
+    margin:0;
     display:inline-block;
-    width:45%;
-    height:100%;
-    padding: 0 10px;
+    border-right: black solid 3px;
 }
 .imgEvento{
-    max-width:100%;
-    max-height: 100%;
+    display:inline-block;
+    height:200px;
+    width: 200px;
     vertical-align: middle;
 }
 .infoEvento{
-    font-size:24px;
+    max-width: 60%;
+    min-width:150px;
+    font-size:16px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
-    margin:0 5px;
+    margin:0;
+    padding:2px;
 }
 .contInfo{
+    max-height: 170px;
+    overflow: hidden;
+    overflow-y: scroll;
     text-align: left;
-    padding-left: 5px;
+    padding: 5px;
     display:inline-block;
     vertical-align: middle;
-    border-left: solid black 3px;
-    width:45%;
+    margin:auto;
+}
+.tags{
+    padding: 5px 0;
+    display:flex;
+    overflow-x:auto;
+    overflow-y: hidden;
+    white-space:nowrap;
+    text-align: center;
+}
+.liTag{
+    list-style-type: none;
+    margin: 0px 5px;
+    display:inline-block;
+}
+.bullet{
+    display:list-item;
+    list-style-type: square;
+    list-style-position:inside;
+}
+.tag{
+    border-radius: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    border: black solid 1px;
+    transition:0.3s;
+}
+.tag:hover{
+    cursor:pointer;
+    transition:0.3s;
+    scale:1.1;
+}
+#botonCarga{
+    border:solid 2px black;
+    border-radius:15px;
+    font-size: 24px;
+    width:120px;
+    height:36px;
+}
+
+@media(max-width:525px){
+    .evento{
+        width: 90vw;
+    }
+    .imgEvento{
+        width: 40vw;
+    }
+    .infoEvento{
+        max-width: 47vw;
+        min-width: 30vw;
+    }
 }
