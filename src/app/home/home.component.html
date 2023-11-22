@@ -75,7 +75,7 @@
       <button (click)="borrarInvestigador(usuarioBorrar.value)" id="btn">Borrar Investigador</button>
       <p>{{mensajeBorrarUsuario}}</p>
     </div>
-    <div style="margin-top: -200px;" class="usuarios">
+    <div class="usuarios">
       <p id="title">Ver Investigadores</p>
       <button (click)="verInvestigadores()" id="btn">Ver Investigadores</button>
       <table *ngIf=getInvestigadores>
@@ -99,37 +99,83 @@
   <div *ngIf="eventos" class="usuarios-container">
     <div class="usuarios">
       <p id="title">Ingreso de eventos</p>
-      <input #nameInvestigador id="name" placeholder="Nombre">
+      <input #nombreEvento id="name" placeholder="Nombre">
       <input #fecha id="mail" placeholder="Fecha">
       <input #fechaCierre id="password" placeholder="Fecha de cierre de convocatoria">
-      <select id="lugares" name="lugares" (change)="seleccionarOpcion($event)">
-        <option *ngFor="let lugar of listaDelugares; let i = index" [value]="i">{{ lugar }}</option>
-      </select>
-      <button id="btn">Ingresar evento</button>
-      <p>{{mensajeIngresoUsuario}}</p>
-    </div>
-    <div class="usuarios">
-      <p id="title">Borrar eventos</p>
-      <input #usuarioBorrar id="name" placeholder="Nombre">
-      <button (click)="borrarInvestigador(usuarioBorrar.value)" id="btn">Borrar Investigador</button>
-      <p>{{mensajeBorrarUsuario}}</p>
-    </div>
-    <div style="margin-top: -200px;" class="usuarios">
-      <p id="title">Ver eventos</p>
-      <button (click)="verInvestigadores()" id="btn">Ver Investigadores</button>
-      <table *ngIf=getInvestigadores>
+      <input #tag id="lostags" placeholder="Tags">
+
+      <button (click)="agregarTag(tag.value)">Agregar tag</button>
+      <table>
         <thead>
           <tr>
-            <th>Nombre</th>
-            <th>Correo</th>
-            <th>Foto de perfil</th>
+            <th>tags</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let item of listaInvestigadores; let i = index" [attr.data-index]="i">
-            <td>{{listaInvestigadores[i].nombre}}</td>
-            <td>{{listaInvestigadores[i].correo}}</td>
-            <td> <img class="foto" src="urlApi + listaLugares[i].fotoPerfil"></td>
+          <tr *ngFor="let item of listaTags; let i = index" [attr.data-index]="i">
+            <td>{{listaTags[i]}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button (click)="vaciarTags()">Vaciar lista de tags</button>
+      <textarea #descripcion id="descripcion" placeholder="Descripcion"></textarea>
+      <select id="lugares" name="lugares" (change)="seleccionarOpcion($event)">
+        <option *ngFor="let lugar of listaDelugares; let i = index" [value]="i">{{ lugar }}</option>
+      </select>
+      <button id="btn"
+        (click)="ingresarEvento(nombreEvento.value, fecha.value, fechaCierre.value, descripcion.value)">Ingresar
+        evento</button>
+      <p>{{mensajeIngresoEventos}}</p>
+    </div>
+    <div class="usuarios">
+      <p id="title">Borrar eventos</p>
+      <input #eventoBorrar id="name" placeholder="Id">
+      <button (click)="borrarEvento(eventoBorrar.value)" id="btn">Borrar evento</button>
+      <p>{{mensajeBorrarEvento}}</p>
+    </div>
+    <div class="usuarios">
+      <p id="title">Ver evento</p>
+      <input #idEvento id="name" placeholder="Id">
+      <button (click)="getEvento(idEvento.value)" id="btn">Ver evento</button>
+      <div class="evento" id="todo" *ngIf="getListaEvento">
+          <div id="fotoDatos">
+              <img id="foto" src={{urlApiImagenes}}{{evento.fotoLugar}} >
+              <div id="datos">
+                  <h2 class="textoDatos">{{evento.nombre}}</h2>
+                  <h4 class="textoDatos">Fecha del evento: {{evento.fecha}}</h4>
+                  <h4 class="textoDatos">Lugar del evento: {{evento.lugarDesarrollo}}</h4>
+                  <h4 class="textoDatos">Direccion del evento: {{evento.direccion}}</h4>
+              </div>
+              <p id="descripcion">{{evento.descripcion}}</p>
+          </div>
+            <div class="contribuciones" *ngFor="let contribucion of evento.contribuciones; let i = index" [attr.data-index]="i">
+                <h2>{{contribucion.titulo}}</h2>
+                <p>Autor: {{contribucion.nombreUsuario}}</p>
+                <p>{{contribucion.descripcion}}</p>
+                <p>Contribucion: <a href={{urlApiArchivos}}{{contribucion.contribucion}}>{{urlApiArchivos}}{{contribucion.contribucion}}</a></p>
+            </div>
+      </div>
+    </div>
+    <div class="usuarios">
+      <p id="title">Ver eventos</p>
+      <button (click)="getEventos()" id="btn">Ver Investigadores</button>
+      <table *ngIf=listaEventos>
+        <thead>
+          <tr>
+            <th>Id</th>
+            <th>Nombre</th>
+            <th>Fecha</th>
+            <th>Cierre de convocatoria</th>
+            <th>Lugar de desarrollo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listaDeEventos; let i = index" [attr.data-index]="i">
+            <td>{{listaDeEventos[i]._id}}</td>
+            <td>{{listaDeEventos[i].nombre}}</td>
+            <td>{{listaDeEventos[i].fecha}}</td>
+            <td>{{listaDeEventos[i].fechaCierreConvocatoria}}</td>
+            <td>{{listaDeEventos[i].lugarDesarrollo}}</td>
           </tr>
         </tbody>
       </table>
@@ -152,7 +198,7 @@
       <button (click)="borrarLugar(lugarBorrar.value)" id="btn">Borrar lugar</button>
       <p>{{mensajeBorrarLugar}}</p>
     </div>
-    <div style="margin-top: -200px;" class="usuarios">
+    <div class="usuarios">
       <p id="title">Ver lugar</p>
       <input #lugarVer id="name" placeholder="Id">
       <button (click)="getLugar(lugarVer.value)" id="btn">Ver lugar</button>
@@ -176,7 +222,7 @@
       </table>
       <p>{{mensajeVerLugar}}</p>
     </div>
-    <div style="margin-top: -200px;" class="usuarios">
+    <div class="usuarios">
       <p id="title">Ver lugares</p>
       <button (click)="getLugares()" id="btn">Ver lugares</button>
       <table *ngIf=getListaLugares>
@@ -222,7 +268,7 @@
       <button (click)="borrarAdministrador(AdminBorrar.value)" id="btn">Borrar Investigador</button>
       <p>{{mensajeBorrarUsuario}}</p>
     </div>
-    <div style="margin-top: -200px;" class="usuarios">
+    <div class="usuarios">
       <p id="title">Ver Investigadores</p>
       <button (click)="verAdministradores()" id="btn">Ver Investigadores</button>
       <table *ngIf=getAdministradores>

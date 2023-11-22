@@ -57,4 +57,19 @@ export class HttpService {
   getLugar(id: any){
     return this.http.get(this.urlApi + "/lugares/" + id,{headers: {Authorization: localStorage["clave"]}});
   }
+  getEventos(){
+    return this.http.get(this.urlApi + "/eventos",{headers: {Authorization: localStorage["clave"]}});
+  }
+  borrarEvento(id: any){
+    return this.http.delete(this.urlApi + "/eventos/" + id,{headers: {Authorization: localStorage["clave"]}});
+  }
+  postEvento(cuerpo: any){
+    return this.http.post(this.urlApi + "/eventos", cuerpo,{headers: {Authorization: localStorage["clave"]}});
+  }
+  getEvento(id: any){
+    return this.http.get(this.urlApi + "/eventos/" + id,{headers: {Authorization: localStorage["clave"]}});
+  }
+  getLugarXNombre(nombre: any){
+    return this.http.get(this.urlApi + "/lugaresXnombre/" + nombre,{headers: {Authorization: localStorage["clave"]}});
+  }
 }

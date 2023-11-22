@@ -1,25 +1,36 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { HttpService } from '../http-service.service';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
 })
+
 export class HomeComponent {
+  
+  @ViewChild('lostags') myInput: ElementRef | undefined;
 
   urlApiImagenes = 'http://localhost:3000/imagenes/';
+  urlApiArchivos = 'http://localhost:3000/archivos/';
   logeado: boolean;
   usuarios: boolean;
+  evento: any;
+  listaTags: Array<string> = [];
+  values: string[] = [''];
   mensajeIngresoAdmin: string;
+  listaEventos: any;
   eventos: boolean;
   admins: boolean;
-  direccionSeleccionada: string = '';
+  mensajeBorrarEvento: string;
+  lugarSeleccionado: string = '';
   mensajeVerLugar: string;
   lugares: boolean;
+  mensajeIngresoEvento: string = ""
   lugar: any;
-  listaDelugares: any;
+  listaDeEventos: any;
+  listaDelugares: Array<string> = [];
   botonAdmins: boolean
   getListaLugar: boolean;
   mensajeIngresoUsuario: string;
@@ -33,19 +44,24 @@ export class HomeComponent {
   esSuper: boolean;
   mensajeIngresoLugares: string;
   mensajeGetLugares: boolean;
+  getListaEvento: boolean = false;
   mensajeModificarUsuario: string;
   selectedPhoto!: File;
   selectedPhotoLugar!: File;
+  mensajeIngresoEventos: string;
   mensajeBorrarLugar: string;
+  verAgregarTag: boolean;
 
   constructor(private http: HttpService) {
     this.logeado = false
     this.usuarios = false
-    this.direccionSeleccionada = '';
+    this.lugarSeleccionado = '';
     this.getListaLugar = false
+    this.mensajeBorrarEvento = ""
     this.mensajeIngresoAdmin = "",
     this.eventos = false
     this.admins = false
+    this.verAgregarTag = false
     this.botonAdmins = false
     this.mensajeIngresoUsuario = "";
     this.mensajeBorrarUsuario = ""
@@ -59,8 +75,10 @@ export class HomeComponent {
     this.getListaLugares = false
     this.mensajeGetLugares = false
     this.mensajeVerLugar = ""
+    this.mensajeIngresoEventos = ""
 
   }
+  
 
   onFileSelected(event: any) {
     this.selectedPhoto = event.target.files[0];
@@ -78,6 +96,18 @@ export class HomeComponent {
     if (localStorage.getItem("esSuper") == "true") {
       this.botonAdmins = true
     }
+
+    this.http.getLugares().subscribe({
+      next: (data) => {
+        for(let i = 0; i < JSON.parse(JSON.stringify(data)).lugares.length; i++){
+          this.listaDelugares.push(JSON.parse(JSON.stringify(data)).lugares[i].nombre)
+        }
+        console.log(this.listaDelugares)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
 
   cerrarSesion() {
@@ -143,7 +173,15 @@ export class HomeComponent {
         }
       });
     }
-
+    agregarTag(tag: string) {
+      this.listaTags.push(tag);
+    }
+    vaciarTags() {
+      this.listaTags = [];
+    }
+    verAgregarTags() {
+      this.verAgregarTag = !this.verAgregarTag
+    }
   borrarLugar(nombre: string) {
     console.log(nombre)
     return this.http.borrarLugar(nombre).subscribe({
@@ -212,6 +250,48 @@ export class HomeComponent {
       }
     })
   }
+  ingresarEvento(nombre: string, fecha: string, fechaCierre: string, descripcion: string) {
+    var body = {
+      tags: this.listaTags,
+      nombre: nombre,
+      fechaCierreConvocatoria: fechaCierre,
+      fecha: fecha,
+      lugarDesarrollo: this.lugarSeleccionado,
+      descripcion: descripcion
+    }
+    return this.http.postEvento(body).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.mensajeIngresoEventos = "Evento ingresado correctamente"
+      },
+      error: (error) => {
+        console.log(error)
+        this.mensajeIngresoEventos = error.error.text
+      }
+    })
+  }
+  getEvento(id: any) {
+    return this.http.getEvento(id).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.getListaEvento = true
+        this.evento = data
+        this.http.getLugarXNombre(this.evento.lugarDesarrollo).subscribe({
+          next: (data) => {
+            console.log(data)
+            this.evento.fotoLugar = JSON.parse(JSON.stringify(data)).lugar.fotoLugar
+            this.evento.direccion = JSON.parse(JSON.stringify(data)).lugar.direccion
+          },
+          error: (error) => {
+            console.log(error)
+          }
+        })
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
+  }
   modificarInvestigador(nombre: string, correo: string, contraseña: string) {
       
       var body = {
@@ -233,7 +313,7 @@ export class HomeComponent {
   seleccionarOpcion(event: any) {
     const indiceSeleccionado = event.target.value;
     console.log("Opción seleccionada:", this.listaDelugares[indiceSeleccionado]);
-    this.direccionSeleccionada = this.listaDelugares[indiceSeleccionado];
+    this.lugarSeleccionado = this.listaDelugares[indiceSeleccionado];
   }
   ingresarLugar(nombre: any, direccion: any){
 
@@ -258,6 +338,31 @@ export class HomeComponent {
       }
     })
 
+  }
+  borrarEvento(id: any) {
+    return this.http.borrarEvento(id).subscribe({
+      next: (data) => {
+        console.log(data)
+        this.mensajeBorrarEvento = "Evento borrado correctamente"
+      },
+      error: (error) => {
+        console.log(error)
+        this.mensajeBorrarEvento = error.error.text
+      }
+    })
+  }
+  getEventos() {
+    this.listaEventos = !this.listaEventos
+    return this.http.getEventos().subscribe({
+      next: (data) => {
+        console.log(data)
+        this.listaDeEventos = JSON.parse(JSON.stringify(data)).eventos
+        console.log(this.listaDeEventos)
+      },
+      error: (error) => {
+        console.log(error)
+      }
+    })
   }
   audisio() {
     this.esSuper = !this.esSuper
