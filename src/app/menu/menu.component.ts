@@ -84,7 +84,7 @@ export class MenuComponent {
 
   setLugaresEventos(eventos: any){
     for (let i = 0; i < eventos.length; i++) {
-      this.http.getLugarEventoId(eventos[i].lugar).subscribe({
+      this.http.getLugarEventoNombre(eventos[i].lugar).subscribe({
         next: (data: any) => {
           this.url = data.urlImagenes
           let lugar = data.lugar.direccion
