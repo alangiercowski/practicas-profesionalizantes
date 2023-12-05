@@ -8,7 +8,10 @@ body {
     background-color: #f2f2f0;
 }
 .nav {
-    margin:0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0;
     margin-bottom: 20px;
     height: 70px;
     width: 100%;
@@ -43,26 +46,32 @@ body {
 }
 
 .nav>.nav-links {
-    display: inline;
-    margin-left: auto;
-    margin-right: 0;
     font-size: 18px;
-    vertical-align: middle;
-    cursor:pointer;
+}
+
+.contFotoPerfil{
+    padding:-10px;
+}
+
+.fotoPerfil{
+    width:60px;
+    border-radius: 50%;
 }
 
 .nav>.nav-links>a {
     display:inline-block;
     vertical-align:middle;
     text-align: center;
-    padding: 10px 20px;
+    padding: 10px 10px;
     text-decoration: none;
     color: black;
+    cursor: pointer;
 }
 
-.nav>.nav-links>a:hover {
+.linkHover:hover{
     background-color: rgba(0, 0, 0, 0.1);
 }
+
 
 .nav>#nav-check {
     display: none;
@@ -142,7 +151,8 @@ input:focus {
         overflow-y: hidden;
         top: 50px;
         left: 0px;
-        margin-top: 30px;
+        margin:auto;
+        margin-top: 60px;
     }
 
     .nav>.nav-links>a {

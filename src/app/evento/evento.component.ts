@@ -62,9 +62,7 @@ export class EventoComponent {
         this.fechaConvocatoria = evento.fechaCierreConvocatoria;
         this.descripcion = evento.descripcion;
 
-        console.log(evento)
-
-        this.http.getLugarEvento(evento.lugarDesarrollo).subscribe({
+        this.http.getLugarEventoId(evento.lugar).subscribe({
           next: (dataLugar) => {
             let lugar = JSON.parse(JSON.stringify(dataLugar));
             const rutaImagenes = lugar.urlImagenes;

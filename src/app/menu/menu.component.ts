@@ -84,7 +84,7 @@ export class MenuComponent {
 
   setLugaresEventos(eventos: any){
     for (let i = 0; i < eventos.length; i++) {
-      this.http.getLugarEvento(eventos[i].lugar).subscribe({
+      this.http.getLugarEventoId(eventos[i].lugar).subscribe({
         next: (data: any) => {
           this.url = data.urlImagenes
           let lugar = data.lugar.direccion
@@ -128,5 +128,12 @@ export class MenuComponent {
   cargarMas(){
     this.pagina++
     this.getEventos()
+  }
+
+  onMouseWheel(event: WheelEvent): void {
+    const delta = event.deltaY;
+    const element = event.currentTarget as HTMLElement;
+    element.scrollLeft += delta;
+    event.preventDefault();
   }
 }

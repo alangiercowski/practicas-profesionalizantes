@@ -1,12 +1,8 @@
 <app-navbar></app-navbar>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link
-     rel="stylesheet"
-     href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"
-   />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css" />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
 <div class="dataPerfil">
-    <mat-icon id="iconoEditarPerfil" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
     <img src="{{fotoPerfil}}" class="fotoPerfil">
     <div class="descPerfil">
         <div class="containerInfo">
@@ -17,13 +13,18 @@
             <p id="correo"><mat-icon> email</mat-icon></p>
             <p class="infoPerfil">{{usuario.correo}}</p>
         </div>
-        <div class="containerInfo" style="margin-left: 10px; margin-bottom: 5px;">
+        <div class="containerInfo inputInfo">
             <input *ngIf="editar" class="infoPerfil" #correoModificar placeholder="{{usuario.correo}}">
         </div>
-        <div class="containerInfo" style="margin-left: 10px; margin-bottom: 5px;">
+        <div class="containerInfo inputInfo">
             <input *ngIf="editar" class="infoPerfil" #pwModificar placeholder="Cambie aquí la contraseña">
         </div>
-        <input style="margin-left: 10px; margin-bottom: 5px;" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file" title="Elija una imagen" /><br>
+        <input class="inputInfo" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file"
+            title="Elija una imagen" /><br>
+
+        <div class="editarPerfil">
+            <mat-icon id="iconoEditarPerfil" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
+        </div>
         <mat-icon id="iconoEditarPerfil" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
         <mat-icon id="iconoEditarPerfil" (click)="modificarUsuario()" *ngIf="editar">done</mat-icon>
     </div>

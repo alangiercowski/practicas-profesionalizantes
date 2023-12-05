@@ -27,10 +27,12 @@
         </div>
         
         <div class="nav-links">
-          <a routerLink="/login" *ngIf="!logeado">Inicio Sesion</a>
-          <a routerLink="/register" *ngIf="!logeado">Registro</a>
-          <a *ngIf="logeado" (click)="logOut()">Cerrar Sesión</a>
-          <a *ngIf="logeado" routerLink="/usuario">perfil</a>
+          <a routerLink="/login" *ngIf="!logeado" class="linkHover">Inicio Sesion</a>
+          <a routerLink="/register" *ngIf="!logeado" class="linkHover">Registro</a>
+          <a *ngIf="logeado" (click)="logOut()" class="linkHover">Cerrar Sesión</a>
+          <a *ngIf="logeado" routerLink="/usuario">
+            <img [src]="fotoPerfil" class="fotoPerfil">
+          </a>
         </div>
       </div>
     </body>

@@ -110,9 +110,9 @@ export class UsuarioComponent {
     }
     this.http.editarUsuario(cuerpo, localStorage.getItem("clave")!).subscribe({
       next: (data:any) =>{
+        this.verEdicion(false)
         this.ngOnInit()
       }
     })
-    this.ngOnInit()
   }
 }

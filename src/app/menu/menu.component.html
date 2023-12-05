@@ -4,7 +4,7 @@
 </head>
 <body>
     <app-navbar (actualizar)="update()"></app-navbar>
-    <div class="tags">
+    <div class="tags" (wheel)="onMouseWheel($event)">
         <li *ngFor="let tag of tags; let i=index" [attr.data-index]="i" class="liTag">
             <button class="tag" (click)="sumarTag(tags[i])">{{tags[i]}}</button>
         </li>

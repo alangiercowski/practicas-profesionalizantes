@@ -14,14 +14,23 @@ hr {
 
 .dataPerfil {
     display: flex;
-    width: 60vw;
-    padding: 10vh;
+    width: 50vw;
+    padding: 5vh;
     margin: 10vh auto;
     border-radius: 75px;
     border:solid black 4px;
     justify-content: center;
     align-items: center;
+}
 
+.inputInfo{
+    margin-left: 10px;
+    margin-bottom: 5px;
+}
+
+.editarPerfil{
+    width: 20px;
+    margin-right: 15px;
 }
 
 .contenedorImagen {

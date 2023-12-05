@@ -59,8 +59,12 @@ export class HttpService {
     return this.http.patch(this.urlApi + "/eventos/" + nombre, {"headers": headers}, cuerpo)
   }
 
-  getLugarEvento(idLugar: string){
-    return this.http.get(this.urlApi + "/lugaresXnombre/" + idLugar)
+  getLugarEventoId(idLugar: string){
+    return this.http.get(this.urlApi + "/lugares/" + idLugar)
+  }
+
+  getLugarEventoNombre(nombreLugar: string){
+    return this.http.get(this.urlApi + "/lugaresXnombre/" + nombreLugar)
   }
 
   subirAporte(cuerpo: any, clave: string){
