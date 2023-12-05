@@ -103,6 +103,7 @@ export class HomeComponent {
       next: (data) => {
         for(let i = 0; i < JSON.parse(JSON.stringify(data)).lugares.length; i++){
           this.listaDelugares.push(JSON.parse(JSON.stringify(data)).lugares[i].nombre)
+          if(this.listaDelugares.length > 0) this.lugarSeleccionado = this.listaDelugares[0];
         }
         console.log(this.listaDelugares)
       },
@@ -268,7 +269,7 @@ export class HomeComponent {
       },
       error: (error) => {
         console.log(error)
-        this.mensajeIngresoEventos = error.error.text
+        this.mensajeIngresoEventos = error.error
       }
     })
   }
