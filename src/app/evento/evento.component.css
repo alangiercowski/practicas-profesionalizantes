@@ -12,7 +12,6 @@ textarea{
     border-radius: 20px;
 
     width: 70vw;
-    min-height: 500px;
 
     margin-left: 15vw;
     margin-right: 15vw;
@@ -83,11 +82,17 @@ textarea{
 #cierreAportar {
     width: calc(100% - 20px);
     padding: 10px;
-    display: inline-block;
+    display: flex;
+    justify-content: right;
 }
 
-#cierr {
+#cierre {
+    height:40px;
+    padding-top:20px;
+    margin-right: 20px;
+    vertical-align: middle;
     margin-bottom: 0;
+    font-size:18px;
 }
 
 #aportar {
