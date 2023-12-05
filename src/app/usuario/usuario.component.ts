@@ -19,12 +19,12 @@ interface Tipo {
 })
 
 export class UsuarioComponent {
-  @ViewChild('nombreModificar') nombreModificarInput: ElementRef;
   @ViewChild('correoModificar') correoModificarInput: ElementRef;
+  @ViewChild('pwModificarRes') pwModificarInputRes: ElementRef;
+  @ViewChild('correoModificarRes') correoModificarInputRes: ElementRef;
   @ViewChild('pwModificar') pwModificarInput: ElementRef;
-  @ViewChild('fotoModificar') fotoModificarInput: ElementRef;
 
-  err: string
+  error: string
   usuario: any
   url = "http://localhost:3000/imagenes"
   editar: boolean
@@ -37,12 +37,12 @@ export class UsuarioComponent {
   constructor(private http: HttpService, public sanitizer: DomSanitizer, private router: Router) {
     this.success = false;
     this.usuario = ""
-    this.err = ""
+    this.error = ""
     this.editar = false
-    this.nombreModificarInput = ElementRef.prototype
     this.correoModificarInput = ElementRef.prototype
     this.pwModificarInput = ElementRef.prototype
-    this.fotoModificarInput = ElementRef.prototype
+    this.pwModificarInputRes = ElementRef.prototype
+    this.correoModificarInputRes = ElementRef.prototype
   }
 
   tipos: Tipo[] = [
@@ -83,12 +83,22 @@ export class UsuarioComponent {
   }
 
   verEdicion(estado: boolean) {
+    if(!estado){
+      this.error = ""
+    }
     this.editar = estado
   }
 
   modificarUsuario() {
-    const correoNuevo = this.correoModificarInput.nativeElement.value
-    const pwNueva = this.pwModificarInput.nativeElement.value
+    let correoNuevo = this.correoModificarInput.nativeElement.value
+    let pwNueva = this.pwModificarInput.nativeElement.value
+    if(correoNuevo == "" && pwNueva == ""){
+      correoNuevo = this.correoModificarInputRes.nativeElement.value
+      pwNueva = this.pwModificarInputRes.nativeElement.value
+      if(correoNuevo =="" && pwNueva == ""){
+        this.error = "no hay cambios"
+      }
+    }
     var cuerpo = new FormData()
     if(correoNuevo){
       console.log("hay correo")
@@ -108,11 +118,18 @@ export class UsuarioComponent {
       console.log(blob)
       console.log(this.selectedProfilePhoto.name)
     }
-    this.http.editarUsuario(cuerpo, localStorage.getItem("clave")!).subscribe({
-      next: (data:any) =>{
-        this.verEdicion(false)
-        this.ngOnInit()
-      }
-    })
+    if(this.error != "no hay cambios"){
+      this.http.editarUsuario(cuerpo, localStorage.getItem("clave")!).subscribe({
+        next: (data:any) =>{
+          this.verEdicion(false)
+          this.error = ""
+          this.ngOnInit()
+  
+        },
+        error: (error) =>{
+          this.error = error.error
+        }
+      })
+    }
   }
 }

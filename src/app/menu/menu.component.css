@@ -49,8 +49,8 @@ body {
 }
 
 .infoEvento {
-    max-width: 60%;
-    min-width: 100%;
+    min-width: 60%;
+    max-width: 100%;
     font-size: 16px;
     overflow: hidden;
     white-space: nowrap;
@@ -70,7 +70,9 @@ body {
 }
 
 .tags {
+    margin-bottom: 15px;
     padding: 5px 0;
+    padding-bottom: 10px;
     display: flex;
     overflow-x: auto;
     text-align: center;

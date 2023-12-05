@@ -14,20 +14,30 @@
             <p class="infoPerfil">{{usuario.correo}}</p>
         </div>
         <div class="containerInfo inputInfo">
-            <input *ngIf="editar" class="infoPerfil" #correoModificar placeholder="{{usuario.correo}}">
+            <input *ngIf="editar" class="infoPerfil input" #correoModificar placeholder="Nuevo correo">
         </div>
         <div class="containerInfo inputInfo">
-            <input *ngIf="editar" class="infoPerfil" #pwModificar placeholder="Cambie aquí la contraseña">
+            <input *ngIf="editar" class="infoPerfil input" #pwModificar placeholder="Nueva contraseña">
         </div>
-        <input class="inputInfo" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file"
-            title="Elija una imagen" /><br>
+        <p style="color:red" class="error" *ngIf="editar">{{error}}</p>
 
-        <div class="editarPerfil">
-            <mat-icon id="iconoEditarPerfil" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
+        <div class="containerInfo inputInfo">
+            <input class="input" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file" title="Elija una imagen" />
         </div>
-        <mat-icon id="iconoEditarPerfil" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
-        <mat-icon id="iconoEditarPerfil" (click)="modificarUsuario()" *ngIf="editar">done</mat-icon>
+
+        <mat-icon class="iconoEditarPerfil input" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
+        <mat-icon class="iconoEditarPerfil input" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
+        <mat-icon class="iconoEditarPerfil input" (click)="modificarUsuario()" *ngIf="editar">done</mat-icon>
     </div>
+    <mat-icon class="iconoEditarPerfilRes" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
+</div>
+<div class="inputsRes">
+    <input *ngIf="editar" class="infoPerfilRes inputRes" #correoModificarRes placeholder="Nuevo correo">
+    <input *ngIf="editar" class="infoPerfilRes inputRes" #pwModificarRes placeholder="Nueva contraseña">
+    <input class="inputRes" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file" title="Elija una imagen" />
+    <mat-icon class="iconoEditarPerfilRes" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
+    <mat-icon class="iconoEditarPerfilRes" (click)="modificarUsuario()" *ngIf="editar">done</mat-icon>
+    <p style="color:red" class="errorRes" *ngIf="editar">{{error}}</p>
 </div>
 
 <p class="titulo">Tus aportes</p>
@@ -36,8 +46,9 @@
         <a class="publicacion" [routerLink]="['../','publicacion', aportesUsuario[i].id]">
             <div class="texto">
                 <p class="tItem">{{aportesUsuario[i].titulo}}</p>
-                <p class="pItem">{{aportesUsuario[i].descripcion}}</p>
-                <p class="arItem">{{aportesUsuario[i].contribucion}}</p>
+                <p class="dItem">{{aportesUsuario[i].descripcion}}</p>
+                <p class="arItem">Archivo: {{aportesUsuario[i].contribucion}}</p>
+                <p class="eItem">Estado: {{aportesUsuario[i].estado}}</p>
             </div>
         </a>
     </div>
