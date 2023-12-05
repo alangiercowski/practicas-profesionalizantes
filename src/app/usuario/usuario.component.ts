@@ -19,9 +19,7 @@ interface Tipo {
 })
 
 export class UsuarioComponent {
-  @ViewChild('correoModificar') correoModificarInput: ElementRef;
   @ViewChild('pwModificarRes') pwModificarInputRes: ElementRef;
-  @ViewChild('correoModificarRes') correoModificarInputRes: ElementRef;
   @ViewChild('pwModificar') pwModificarInput: ElementRef;
 
   error: string
@@ -39,10 +37,8 @@ export class UsuarioComponent {
     this.usuario = ""
     this.error = ""
     this.editar = false
-    this.correoModificarInput = ElementRef.prototype
     this.pwModificarInput = ElementRef.prototype
     this.pwModificarInputRes = ElementRef.prototype
-    this.correoModificarInputRes = ElementRef.prototype
   }
 
   tipos: Tipo[] = [
@@ -90,20 +86,20 @@ export class UsuarioComponent {
   }
 
   modificarUsuario() {
-    let correoNuevo = this.correoModificarInput.nativeElement.value
-    let pwNueva = this.pwModificarInput.nativeElement.value
-    if(correoNuevo == "" && pwNueva == ""){
-      correoNuevo = this.correoModificarInputRes.nativeElement.value
-      pwNueva = this.pwModificarInputRes.nativeElement.value
-      if(correoNuevo =="" && pwNueva == ""){
-        this.error = "no hay cambios"
+    let pwNueva = ""
+    console.log(this.pwModificarInputRes.nativeElement.value == "")
+    console.log(this.selectedProfilePhoto === undefined)
+    if(this.pwModificarInput.nativeElement.value == "" && this.selectedProfilePhoto === undefined){
+      if(this.pwModificarInputRes.nativeElement.value == ""){
+        this.error = "No hay cambios"
+        console.log("no hay cambios")
+        return
       }
     }
-    var cuerpo = new FormData()
-    if(correoNuevo){
-      console.log("hay correo")
-      cuerpo.append("correo", correoNuevo)
+    else{
+      let pwNueva = this.pwModificarInput.nativeElement.value
     }
+    var cuerpo = new FormData()
     if(pwNueva){
       cuerpo.append("contra", pwNueva)
       console.log("hay pw")
@@ -118,7 +114,6 @@ export class UsuarioComponent {
       console.log(blob)
       console.log(this.selectedProfilePhoto.name)
     }
-    if(this.error != "no hay cambios"){
       this.http.editarUsuario(cuerpo, localStorage.getItem("clave")!).subscribe({
         next: (data:any) =>{
           this.verEdicion(false)
@@ -130,6 +125,5 @@ export class UsuarioComponent {
           this.error = error.error
         }
       })
-    }
   }
 }

@@ -14,9 +14,6 @@
             <p class="infoPerfil">{{usuario.correo}}</p>
         </div>
         <div class="containerInfo inputInfo">
-            <input *ngIf="editar" class="infoPerfil input" #correoModificar placeholder="Nuevo correo">
-        </div>
-        <div class="containerInfo inputInfo">
             <input *ngIf="editar" class="infoPerfil input" #pwModificar placeholder="Nueva contraseña">
         </div>
         <p style="color:red" class="error" *ngIf="editar">{{error}}</p>
@@ -32,7 +29,6 @@
     <mat-icon class="iconoEditarPerfilRes" (click)="verEdicion(true)" *ngIf="!editar">edit</mat-icon>
 </div>
 <div class="inputsRes">
-    <input *ngIf="editar" class="infoPerfilRes inputRes" #correoModificarRes placeholder="Nuevo correo">
     <input *ngIf="editar" class="infoPerfilRes inputRes" #pwModificarRes placeholder="Nueva contraseña">
     <input class="inputRes" *ngIf="editar" (change)="onProfilePhotoSelected($event)" type="file" title="Elija una imagen" />
     <mat-icon class="iconoEditarPerfilRes" (click)="verEdicion(false)" *ngIf="editar">cancel</mat-icon>
